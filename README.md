@@ -53,7 +53,7 @@ docker build -t openhorizon/mjpg-streamer-pi3 .
 * mjpg-streamer uses [standard picam options](https://www.raspberrypi.org/documentation/usage/camera/) (Vertical flip: -vf / Horizontal flip: -hf)
 
 ```
-docker run -it --rm --privileged -p 8080:8080 openhorizon/mjpg-streamer-pi3 ./mjpg_streamer -o "output_http.so -w ./www" -i "input_raspicam.so -x 640 -y 480 -fps 20 -ex night"
+docker run -d --privileged -p 8080:8080 --name mjpg_streamer --restart always  kassard/mjpg_streamer ./mjpg_streamer -o "output_http.so -w ./www" -i "input_raspicam.so -x 640 -y 480 -fps 20 -ex night"
 ```  
 Using a web browser, visit your Pi3's IP address followed by 8080 (e.g. http://xxx.xxx.xxx.xxx:8080) on your LAN.
 That's it! You should be able to see a simple web page with a static image from your Pi.  Connect to http://xxx.xxx.xxx.xxx:8080/?action=stream to see your video stream.
